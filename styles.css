@@ -64,6 +64,7 @@ header h2 {
 .form-control label {
   display: inline-block;
   margin-bottom: 5px;
+  font-family: Albert Sans;
 
 }
 
@@ -71,7 +72,7 @@ header h2 {
   border: 2px solid #f0f0f0;
   border-radius: 4px;
   display: block;
-  font-family: inherit;
+  font-family: Albert sans;
   font-size: 14px;
   width: 100%;
   padding: 10px;
@@ -100,11 +101,18 @@ header h2 {
 .choice-input-field {
   /* margin: 4px auto 3px auto; */
   padding-bottom: 10px;
+  margin: 0;
+  
+  
+
+  
 }
 
 .radio-group {
   display: flex;
   gap: 50px; 
+  font-family: Albert Sans;
+  font-size: 14px;
 }
 
 
@@ -116,7 +124,7 @@ header h2 {
   width: 100%;
   /* width: 40%; */
   padding: 10px;
-  font-family: inherit;
+  font-family: Albert Sans;
   font-size: 16px;
   width: 100%;
   border-radius: 10px;
@@ -133,6 +141,7 @@ h2 {
   font-size: 60px;
   padding-top: px;
   text-align:center;
+  letter-spacing: 0.7px;
 
 }
 
@@ -162,4 +171,24 @@ h2 {
 .form-control.error small {
   color:  #e74c3c;
   visibility: visible;
+}
+
+#dynamic-dropdown {
+  margin-top: 20px;
+  height: 30px;
+  
+
+}
+
+
+p_motto {
+  color: green;
+  text-align: center;
+  font-size: 25px;
+  padding-top: 2px;
+  font-family: "Dancing Script", cursive;;
+}
+
+.selected {
+  background-color: yellow;
 }

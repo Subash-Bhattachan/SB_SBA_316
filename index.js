@@ -20,6 +20,7 @@ const firstName = document.getElementById("firstname");
 const lastName = document.getElementById("lastname");
 const phoneNumber = document.getElementById("phonenumber");
 const emailAddress = document.getElementById("emailaddress");
+const radioGroup = document.getElementsByClassName("radio-group")
 
 // submitBtn.addEventListener("click",()=>{
 //     }
@@ -61,6 +62,14 @@ function checkInputs(e) {
         
         return false;
     }
+
+    const radioGroupVal = validateRadioGroup();
+    if (radioGroupVal === false) {
+        return false;
+    }
+
+
+
     form.reset();
     return true;
 
@@ -171,7 +180,7 @@ function validatePhone() {
 
 
 function validateEmail() {
-  let emailAddressVal = emailAddress.value.trim();
+  let emailAddressVal = emailAddress.value.trim().toLowerCase();
 
   if (emailAddressVal === "") {
     setErrorFor(emailAddress, "Please provide an email.");
@@ -208,6 +217,66 @@ function validateEmail() {
 
   return true;
 }
+
+//const radioGroup = document.getElementsByClassName("radio-group")
+
+function validateRadioGroup() {
+    const radioGroups = document.querySelectorAll('input[name="options"]');
+    let selectedValue;
+
+    radioGroups.forEach((radioGroup) => {
+        if (!radioGroup.checked) {
+            setErrorFor(radioGroup, "Are you attending the party or not?");
+        radioGroup.focus();
+        return false;
+        }
+        else {
+            selectedValue = radioGroup.value;
+        }
+    });
+   
+        
+    return true;
+    };
+
+
+
+
+// creating the dropdown menu
+const dropDown = document.getElementById("dynamic-dropdown");
+const options = ["One person", "Two people", "Three people", "Four people", "Five people"];
+
+// using for loop to populate the dropdown with options
+
+options.forEach(option => {
+    const opt = document.createElement("option");
+    opt.value = option;
+    opt.textContent = option;
+    dropDown.appendChild(opt);
+});
+
+// adding an event handler when an user changes the dropdown menu
+dropDown.addEventListener("change", function() {
+    alert("You have selected: " + this.value);
+    const selectedValue = this.value;
+
+    // looping through the options to modify the selected one
+    for(let i = 0; i < dropDown.options.length; i++) {
+        const option = dropDown.options[i];  
+        if (option.value === selectedValue) {
+            option.style.backgroundColor = "red";
+            
+        }
+        else {
+            option.style.backgroundColor = "";
+        }
+    
+    }
+
+
+
+
+});
 
 
 

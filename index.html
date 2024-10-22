@@ -9,13 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h2>Wedding RSVP</h2> 
-            <p>Come, grace us with your presence!</p>         
+            <p_motto>Come, grace us with your presence!</p>         
         </div>
         <form class="form" id="form">
             <div class="form-control">
@@ -63,7 +69,13 @@
 
             <div class="form-control">
                 <label></label>
-                <input type="text" placeholder="If yes, how many people are attending?" id="firstname">
+                
+                <label for="dynamic-dropdown"></label>
+        <select id="dynamic-dropdown">
+            <option value="disabled selected">If yes, how many people are attending altogether?</option>
+        </select>
+                
+        
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
