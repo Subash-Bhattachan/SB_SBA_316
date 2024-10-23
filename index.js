@@ -1,5 +1,4 @@
 
-
 console.log("script loaded");
 let title = document.querySelector("title");
 let underline = document.querySelector("underline");
@@ -20,7 +19,10 @@ const firstName = document.getElementById("firstname");
 const lastName = document.getElementById("lastname");
 const phoneNumber = document.getElementById("phonenumber");
 const emailAddress = document.getElementById("emailaddress");
-const radioGroup = document.getElementsByClassName("radio-group")
+//const radioGroup = document.getElementsByClassName("radio-group")
+const radioInputs = document.querySelectorAll(".radio-input");
+const radioGroup = document.querySelector(".radio-group");
+
 
 // submitBtn.addEventListener("click",()=>{
 //     }
@@ -273,63 +275,39 @@ dropDown.addEventListener("change", function() {
     
     }
 
-
-
-
 });
 
 
 
+// writing function to update the selection and change the parent color
+function updateChoice() {
+    let selectedValue = "";
+    radioInputs.forEach(input => {
+        if (input.checked) {
+            selectedValue = input.value;
+        
+        }
+    });
+
+console.log("Selected Option:", selectedValue);
+
+// here the parent node is radioGroup and the children nodes are label elements such as radio buttons and text
+if (selectedValue === "yes") {
+    radioGroup.style.color = "green";
+} else if (selectedValue === "no") {
+    radioGroup.style.color = "red";
+
+} else {
+    radioGroup.style.color = "";
+}
+}
+// adding event listener to radio
+radioInputs.forEach(input => {
+    input.addEventListener("change", updateChoice);
+});
 
 
 
-// function checkInputs() {
-//     // getting the values from the inputs
-//     const firstNameVal = firstName.value.trim();
-//     const lastNameVal = lastName.value.trim();
-//     const phoneNumberVal = phoneNumber.value.trim();
-//     const emailAddressVal = emailAddress.value.trim();
-
-
-
-//     if(firstNameVal === "") {
-//         // show error
-//         // and error class
-//         setErrorFor(firstName, "First name cannot be blank.")
-//         // alert("wrong");
-//         // errors.push("wrong")
-//     }
-//     else {
-//         // add success class
-//         setSuccessFor(firstName);
-//     }
-
-
-//     if(lastNameVal === "") {
-//         setErrorFor(lastName, "Last name cannot be blank.")
-//     }
-//     else {
-//         setSuccessFor(lastName);
-//     }
-
-
-    
-//     if(phoneNumberVal === "") {
-//         setErrorFor(phoneNumber, "Phone Number cannot be blank.")
-//     }
-//     else {
-//         setSuccessFor(phoneNumber);
-//     }
-
-    
-//     if(emailAddressVal === "") {
-//         setErrorFor(emailAddress, "Email Address cannot be blank.")
-//     }
-//     else {
-//         setSuccessFor(emailAddress);
-//     }
-
-// }
 
 
 function setErrorFor(input, message) {
