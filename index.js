@@ -1,20 +1,7 @@
 
-console.log("script loaded");
 let title = document.querySelector("title");
-let underline = document.querySelector("underline");
-let nameField = document.querySelector("name-input-field");
-let contactField = document.querySelector("contact-input-field");
-let choiceField = document.querySelector("choice-input-field");
-let countField = document.querySelector("count-input-field");
 let submitBtn = document.querySelector("submitBtn");
-
-
-
-
-
- 
 const form = document.getElementById("form");
-
 const firstName = document.getElementById("firstname");
 const lastName = document.getElementById("lastname");
 const phoneNumber = document.getElementById("phonenumber");
@@ -27,14 +14,15 @@ const radioGroup = document.querySelector(".radio-group");
 // submitBtn.addEventListener("click",()=>{
 //     }
 
-console.log(firstName);
-console.log(form);
+
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     
     if(checkInputs(e)) {
-        form.submit();
+        setTimeout(() => {
+            form.submit();
+        }, 2000); // to delay the submission by 2 seconds
     }
 });
 
@@ -71,7 +59,7 @@ function checkInputs(e) {
     }
 
 
-
+    this.submit();
     form.reset();
     return true;
 
@@ -90,7 +78,7 @@ function validateFirstName() {
     if(firstNameVal.length < 2) {
         // show error and error class
         setErrorFor(firstName, "First name cannot be less than two characters.")
-        //alert("wrong");
+        
         
         firstName.focus();
         return false;
@@ -99,7 +87,7 @@ function validateFirstName() {
     if(firstNameVal.length > 30) {
         // show error and error class
         setErrorFor(firstName, "First name cannot be more than thirty characters.")
-        //alert("wrong");
+        
         
         firstName.focus();
         return false;
@@ -126,7 +114,7 @@ function validateLastName() {
     if(lastNameVal.length < 2) {
         // show error and error class
         setErrorFor(lastName, "Last name cannot be less than two characters.")
-        //alert("wrong");
+        
         
         lastName.focus();
         return false;
@@ -135,7 +123,7 @@ function validateLastName() {
     if(lastNameVal.length > 30) {
         // show error and error class
         setErrorFor(lastName, "Last name cannot be more than thirty characters.")
-        //alert("wrong");
+        
         
         lastName.focus();
         return false;
@@ -220,7 +208,7 @@ function validateEmail() {
   return true;
 }
 
-//const radioGroup = document.getElementsByClassName("radio-group")
+
 
 function validateRadioGroup() {
     const radioGroups = document.querySelectorAll('input[name="options"]');
@@ -244,33 +232,41 @@ function validateRadioGroup() {
 
 
 
-// creating the dropdown menu
+// creating the dropdown menu to pick options from
 const dropDown = document.getElementById("dynamic-dropdown");
 const options = ["One person", "Two people", "Three people", "Four people", "Five people"];
 
-// using for loop to populate the dropdown with options
+// using DocumentFragment for efficient option creation
+const fragment = document.createDocumentFragment();
 
+// using for loop to populate the dropdown with options
 options.forEach(option => {
     const opt = document.createElement("option");
     opt.value = option;
     opt.textContent = option;
-    dropDown.appendChild(opt);
+    fragment.appendChild(opt); // this appends each option to the fragment created 
 });
+
+// now appending all the options to the dropdown 
+dropDown.appendChild(fragment);
 
 // adding an event handler when an user changes the dropdown menu
 dropDown.addEventListener("change", function() {
-    alert("You have selected: " + this.value);
+    window.alert("You have selected: " + this.value);
     const selectedValue = this.value;
+
+    // this changes the title attribute of the dropdown 
+    this.setAttribute("title", `Selected: ${selectedValue}`);
 
     // looping through the options to modify the selected one
     for(let i = 0; i < dropDown.options.length; i++) {
         const option = dropDown.options[i];  
         if (option.value === selectedValue) {
-            option.style.backgroundColor = "red";
+            option.style.backgroundColor = "red"; // to highlight the selection
             
         }
         else {
-            option.style.backgroundColor = "";
+            option.style.backgroundColor = ""; // to reset others that is not selected
         }
     
     }
@@ -294,13 +290,21 @@ console.log("Selected Option:", selectedValue);
 // here the parent node is radioGroup and the children nodes are label elements such as radio buttons and text
 if (selectedValue === "yes") {
     radioGroup.style.color = "green";
-} else if (selectedValue === "no") {
+     
+} 
+else if (selectedValue === "no") {
     radioGroup.style.color = "red";
+   
+    
 
-} else {
+} 
+else {
     radioGroup.style.color = "";
+    
+   
 }
 }
+
 // adding event listener to radio
 radioInputs.forEach(input => {
     input.addEventListener("change", updateChoice);
@@ -309,7 +313,7 @@ radioInputs.forEach(input => {
 
 
 
-
+// to pront out the error message
 function setErrorFor(input, message) {
     const formControl = input.parentElement;
     const small = formControl.querySelector("small");
@@ -320,6 +324,7 @@ function setErrorFor(input, message) {
 }
 
 
+// to print out the error message
 function setSuccessFor(input) {
     const formControl = input.parentElement;
     formControl.className = "form-control success";
