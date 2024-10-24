@@ -8,7 +8,7 @@ const phoneNumber = document.getElementById("phonenumber");
 const emailAddress = document.getElementById("emailaddress");
 //const radioGroup = document.getElementsByClassName("radio-group")
 const radioInputs = document.querySelectorAll(".radio-input");
-const radioGroup = document.querySelector(".radio-group");
+
 
 
 // submitBtn.addEventListener("click",()=>{
@@ -30,31 +30,32 @@ function checkInputs(e) {
     // e.preventDefault();
     const firstNameVal = validateFirstName();
     if (firstNameVal === false) {
-        
         return false;
     }
 
     const lastNameVal = validateLastName();
     if (lastNameVal === false) {
-        
         return false;
     }
 
     const phoneNumberVal = validatePhone();
     if (phoneNumberVal === false) {
-        
         return false;
     }
 
 
     const emailAddressVal = validateEmail();
     if (emailAddressVal === false) {
-        
         return false;
     }
 
     const radioGroupVal = validateRadioGroup();
     if (radioGroupVal === false) {
+        return false;
+    }
+
+    const dropDownVal = validateDropDown();
+    if (dropDownVal === false) {
         return false;
     }
 
@@ -208,27 +209,43 @@ function validateEmail() {
   return true;
 }
 
-
+const radioGroup = document.querySelector(".radio-group");
 
 function validateRadioGroup() {
     const radioGroups = document.querySelectorAll('input[name="options"]');
     let selectedValue;
+    let isSelected = false;
 
     radioGroups.forEach((radioGroup) => {
-        if (!radioGroup.checked) {
-            setErrorFor(radioGroup, "Are you attending the party or not?");
-        radioGroup.focus();
-        return false;
-        }
-        else {
+        if (radioGroup.checked) {
+            isSelected = true;
             selectedValue = radioGroup.value;
         }
-    });
-   
-        
-    return true;
-    };
+    })
+    if(!isSelected) {
+        setErrorFor(radioGroup, "Are you attending the party or not?");
+        radioGroups[0].focus();
+        return false;
 
+    } else {
+        clearErrorFor(radioGroups[0]);
+
+        if (selectedValue == "yes") {
+            window.alert ("Thank you for confirming that you are coming!");
+
+            }else {
+                window.alert ("Thank you for confirming that you are not coming.")
+            }
+            return true;
+        }
+    }
+
+
+
+
+
+ 
+    
 
 
 
@@ -332,7 +349,11 @@ function setSuccessFor(input) {
 
 
 
-
+function clearErrorFor(input) {
+    const formControl = input.parentElement;
+     formControl.className = "form-control success";
+    small.innerText = "none";
+}
 
 
 
