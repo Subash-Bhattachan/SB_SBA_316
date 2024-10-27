@@ -1,5 +1,8 @@
 
-
+:root {
+  --success-color: #23cc71;
+  --error-color: #e74c3c; 
+}
 
 * {
   box-sizing: border-box;
@@ -89,6 +92,7 @@ header h2 {
 }
 
 .form-control small {
+  color: #e74c3c;
   visibility: hidden;
   position: absolute;
   bottom: 0;

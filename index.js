@@ -1,6 +1,6 @@
 
 let title = document.querySelector("title");
-let submitBtn = document.querySelector("submitBtn");
+let submitBtn = document.querySelector("submit");
 const form = document.getElementById("form");
 const firstName = document.getElementById("firstname");
 const lastName = document.getElementById("lastname");
@@ -30,9 +30,10 @@ form.addEventListener("submit", (e) => {
 });
 
 function checkInputs(e) {
-    // e.preventDefault();
+    
     const firstNameVal = validateFirstName();
     if (firstNameVal === false) {
+        //e.returnValue = false;
         return false;
     }
 
@@ -62,8 +63,8 @@ function checkInputs(e) {
         return false;
     }
 
-
-    this.submit();
+    
+    //this.submit();
     form.reset();
     return true;
 
@@ -73,6 +74,9 @@ function checkInputs(e) {
 ///////////////////////////////////////////
 function validateFirstName() {
     const firstNameVal = firstName.value.trim();
+    
+    
+    //clearErrorFor(firstName);  
     if(firstNameVal.length == 0) {
         setErrorFor(firstName, "First name cannot be blank.")
         firstName.focus();
@@ -82,40 +86,45 @@ function validateFirstName() {
     if(firstNameVal.length < 2) {
         // show error and error class
         setErrorFor(firstName, "First name cannot be less than two characters.")
-        
-        
-        firstName.focus();
-        return false;
-    }
-
-    if(firstNameVal.length > 30) {
-        // show error and error class
-        setErrorFor(firstName, "First name cannot be more than thirty characters.")
-        
-        
         firstName.focus();
         return false;
     }
     
-    if(!firstNameVal.match(/^[A-Za-z]+$/)){
+
+    else if(firstNameVal.length > 30) {
+        // show error and error class
+        setErrorFor(firstName, "First name cannot be more than thirty characters.")
+        firstName.focus();
+        return false;
+    }
+    
+    
+    else if(!firstNameVal.match(/^[A-Za-z]+$/)){
         setErrorFor(firstName, "First name must contain letters only.")
         firstName.focus();
         return false;
     }
 
-return true;     
+    else {
+        setSuccessFor(firstName)
+    }
+//clearErrorFor(firstName);    
+return firstNameVal; 
+
+
 };
 
 
 function validateLastName() {
     const lastNameVal = lastName.value.trim();
+    
     if(lastNameVal.length == 0) {
         setErrorFor(lastName, "Last name cannot be blank.")
         lastName.focus();
         return false;
     }
 
-    if(lastNameVal.length < 2) {
+    else if(lastNameVal.length < 2) {
         // show error and error class
         setErrorFor(lastName, "Last name cannot be less than two characters.")
         
@@ -124,7 +133,7 @@ function validateLastName() {
         return false;
     }
 
-    if(lastNameVal.length > 30) {
+    else if(lastNameVal.length > 30) {
         // show error and error class
         setErrorFor(lastName, "Last name cannot be more than thirty characters.")
         
@@ -133,13 +142,16 @@ function validateLastName() {
         return false;
     }
     
-    if(!lastNameVal.match(/^[A-Za-z]+$/)){
+    else if(!lastNameVal.match(/^[A-Za-z]+$/)){
         setErrorFor(lastName, "Last name must contain letters only.")
         lastName.focus();
         return false;
     }
+    else {
+        setSuccessFor(lastName)
+    }
 
-return true;     
+return lastNameVal;     
 };
 
 
@@ -153,21 +165,23 @@ function validatePhone() {
         return false;
     }
 
-    if(phoneNumberVal.length > 10) {
-        setErrorFor(phoneNumber, "Phone number cannot be more than 10 digits.")
+    else if(phoneNumberVal.length != 10) {
+        setErrorFor(phoneNumber, "Phone number cannot be more or less than 10 digits.")
         phoneNumber.focus();
         return false;
     }
 
-    if(!phoneNumberVal.match(/^\d+$/)) {
+    else if(!phoneNumberVal.match(/^\d+$/)) {
         setErrorFor(phoneNumber, "Phone number must contain only numbers.")
         phoneNumber.focus();
         return false;
     }
+    else {
+        setSuccessFor(phoneNumber)
+    }
 
 
-
-    return true;
+    return phoneNumberVal;
 };
 
 
@@ -175,6 +189,8 @@ function validatePhone() {
 
 function validateEmail() {
   let emailAddressVal = emailAddress.value.trim().toLowerCase();
+  const atpos = emailAddressVal.indexOf("@");
+  const dotpos = emailAddressVal.lastIndexOf(".");
 
   if (emailAddressVal === "") {
     setErrorFor(emailAddress, "Please provide an email.");
@@ -182,10 +198,10 @@ function validateEmail() {
     return false;
   }
 
-  const atpos = emailAddressVal.indexOf("@");
-  const dotpos = emailAddressVal.lastIndexOf(".");
+  
 
-  if (atpos < 1) {
+  else if (atpos < 1) {
+    
     setErrorFor(emailAddress, 
       "@ symbol must not be at the beginning of the email."
     );
@@ -193,7 +209,7 @@ function validateEmail() {
     return false;
   }
 
-  if (dotpos - atpos < 2) {
+  else if (dotpos - atpos < 2) {
     setErrorFor(emailAddress, 
       "\nYou must include a domain name after the @ symbol."
     );
@@ -201,7 +217,7 @@ function validateEmail() {
     return false;
   }
 
-  if (emailAddressVal.endsWith("@example.com")) {
+  else if (emailAddressVal.endsWith("@example.com")) {
     setErrorFor(emailAddress, 
       "Your email address cannot be example.com."
     );
@@ -209,8 +225,16 @@ function validateEmail() {
     return false;
   }
 
-  return true;
+  else {
+    setSuccessFor(emailAddress)
 }
+
+
+  return emailAddressVal;
+}
+
+
+
 
 const radioGroup = document.querySelector(".radio-group");
 
@@ -350,14 +374,17 @@ function setErrorFor(input, message) {
 function setSuccessFor(input) {
     const formControl = input.parentElement;
     formControl.className = "form-control success";
+    
 }
 
 
 
 function clearErrorFor(input) {
     const formControl = input.parentElement;
+    const small = formControl.querySelector("small")
      formControl.className = "form-control success";
-    small.innerText = "none";
+    small.innerText = "";
+    //small.innerText = "none";
 }
 
 
