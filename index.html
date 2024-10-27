@@ -26,7 +26,7 @@
         <form class="form" id="form">
             <div class="form-control">
                 <label>First Name</label>
-                <input type="text" placeholder="John" id="firstname">
+                <input type="text" placeholder="John" id="firstname" required>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
@@ -57,12 +57,12 @@
                 <div class="radio-group">
                     
                     <label>
-                            <input type="radio" name="option" value="yes"  class="radio-input">
+                            <input type="radio" id="yesRadio" name="option" value="yes"  class="radio-input">
                                     I am attending.
                     </label>
                     
                     <label>
-                            <input type="radio" name="option" value="no" class="radio-input">
+                            <input type="radio" id="noRadio" name="option" value="no" class="radio-input">
                                     I am not attending.
                     </label>
 

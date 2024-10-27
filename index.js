@@ -8,6 +8,9 @@ const phoneNumber = document.getElementById("phonenumber");
 const emailAddress = document.getElementById("emailaddress");
 //const radioGroup = document.getElementsByClassName("radio-group")
 const radioInputs = document.querySelectorAll(".radio-input");
+const yesRadio = document.getElementById('yesRadio');
+const noRadio = document.getElementById('noRadio');
+
 
 
 
@@ -307,11 +310,13 @@ console.log("Selected Option:", selectedValue);
 // here the parent node is radioGroup and the children nodes are label elements such as radio buttons and text
 if (selectedValue === "yes") {
     radioGroup.style.color = "green";
-     
+    //yesRadio.style.backgroundColor = 'green'; // not working as intended
+    //noRadio.style.backgroundColor = ''; // not working as intended
 } 
 else if (selectedValue === "no") {
     radioGroup.style.color = "red";
-   
+    //noRadio.style.backgroundColor = 'red'; // not working as intended
+    //yesRadio.style.backgroundColor = ''; // not working as intended
     
 
 } 
