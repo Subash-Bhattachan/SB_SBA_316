@@ -97,10 +97,17 @@ header h2 {
   position: absolute;
   bottom: 0;
   left: 0;
-  
-  
-  
 }
+
+.radio-group small {
+  color: #e74c3c;
+  visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+
 
 .choice-input-field {
   /* margin: 4px auto 3px auto; */

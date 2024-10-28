@@ -13,12 +13,6 @@ const noRadio = document.getElementById('noRadio');
 
 
 
-
-// submitBtn.addEventListener("click",()=>{
-//     }
-
-
-
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     
@@ -63,11 +57,9 @@ function checkInputs(e) {
         return false;
     }
 
-    
     //this.submit();
     form.reset();
     return true;
-
 
 }
 
@@ -114,7 +106,7 @@ return firstNameVal;
 
 };
 
-
+///////////////////////////////////////////
 function validateLastName() {
     const lastNameVal = lastName.value.trim();
     
@@ -155,7 +147,7 @@ return lastNameVal;
 };
 
 
-
+///////////////////////////////////////////
 function validatePhone() {
     const phoneNumberVal = phoneNumber.value.trim();
 
@@ -186,7 +178,7 @@ function validatePhone() {
 
 
 
-
+///////////////////////////////////////////
 function validateEmail() {
   let emailAddressVal = emailAddress.value.trim().toLowerCase();
   const atpos = emailAddressVal.indexOf("@");
@@ -198,10 +190,7 @@ function validateEmail() {
     return false;
   }
 
-  
-
   else if (atpos < 1) {
-    
     setErrorFor(emailAddress, 
       "@ symbol must not be at the beginning of the email."
     );
@@ -229,56 +218,50 @@ function validateEmail() {
     setSuccessFor(emailAddress)
 }
 
-
   return emailAddressVal;
 }
 
 
-
-
+///////////////////////////////////////////
 const radioGroup = document.querySelector(".radio-group");
+const radioGroups = document.querySelectorAll('input[name="option"]');
 
 function validateRadioGroup() {
-    const radioGroups = document.querySelectorAll('input[name="options"]');
-    let selectedValue;
-    let isSelected = false;
-
-    radioGroups.forEach((radioGroup) => {
-        if (radioGroup.checked) {
-            isSelected = true;
-            selectedValue = radioGroup.value;
-        }
-    })
-    if(!isSelected) {
+    
+    let selectedValue1 = Array.from(radioGroups).find(radio => radio.checked);
+    
+    if(!selectedValue1) {
         setErrorFor(radioGroup, "Are you attending the party or not?");
         radioGroups[0].focus();
-        return false;
+        
 
-    } else {
-        clearErrorFor(radioGroups[0]);
+    } 
+    else {
+        clearErrorFor(radioGroup);
 
-        if (selectedValue == "yes") {
-            window.alert ("Thank you for confirming that you are coming!");
-
-            }else {
-                window.alert ("Thank you for confirming that you are not coming.")
-            }
-            return true;
+        if (selectedValue1.value === "yes") {
+                        const numberOfPeople = dropDown.value;
+                        if (numberOfPeople) {
+                            window.alert(`Thank you for confirming that you are coming!\n We appreciate you bringing ${numberOfPeople}.`);
+                        } 
+                    } 
+                    
+        else {
+                window.alert("Thank you for confirming that you are not coming. \n You can exit the application.");
+                }    
+                form.reset(); 
         }
+        
     }
 
 
 
-
-
- 
-    
-
-
+///////////////////////////////////////////
 
 // creating the dropdown menu to pick options from
 const dropDown = document.getElementById("dynamic-dropdown");
 const options = ["One person", "Two people", "Three people", "Four people", "Five people"];
+
 
 // using DocumentFragment for efficient option creation
 const fragment = document.createDocumentFragment();
@@ -318,7 +301,7 @@ dropDown.addEventListener("change", function() {
 });
 
 
-
+///////////////////////////////////////////
 // writing function to update the selection and change the parent color
 function updateChoice() {
     let selectedValue = "";
@@ -342,12 +325,10 @@ else if (selectedValue === "no") {
     //noRadio.style.backgroundColor = 'red'; // not working as intended
     //yesRadio.style.backgroundColor = ''; // not working as intended
     
-
 } 
 else {
     radioGroup.style.color = "";
-    
-   
+     
 }
 }
 
@@ -357,9 +338,7 @@ radioInputs.forEach(input => {
 });
 
 
-
-
-// to pront out the error message
+// to print out the error message
 function setErrorFor(input, message) {
     const formControl = input.parentElement;
     const small = formControl.querySelector("small");
@@ -376,7 +355,6 @@ function setSuccessFor(input) {
     formControl.className = "form-control success";
     
 }
-
 
 
 function clearErrorFor(input) {
